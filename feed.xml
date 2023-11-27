@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blog Feed</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Blog Feed</h1>
+</header>
+
+<section id="entries">
+    <!-- Entry 1 -->
+    <article>
+        <h2>The Gospel of John - Plan of Salvation</h2>
+        <p>Published on: 2022-05-16</p>
+        <p>Updated on: 2022-05-16</p>
+        <p>Author: [Clyde Baidoo]</p>
+        <div class="content">
+            <!-- Content goes here -->
+        </div>
+    </article>
+
+    <!-- Entry 2 -->
+    <article>
+        <h2>The Solid Foundation - Christ, Our Rock</h2>
+        <p>Published on: 2022-01-18</p>
+        <p>Updated on: 2022-01-18</p>
+        <p>Author: [Clyde Baidoo]</p>
+        <div class="content">
+            <!-- Content goes here -->
+        </div>
+    </article>
+
+    <!-- Entry 3 -->
+    <article>
+        <h2>Existence of God - Does God Exist?</h2>
+        <p>Published on: 2021-05-06</p>
+        <p>Updated on: 2021-05-06</p>
+        <p>Author: [Clyde Baidoo]</p>
+        <div class="content">
+            <!-- Content goes here -->
+        </div>
+    </article>
+
+    <!-- Entry 4 -->
+    <article>
+        <h2>Belief, Myth or Truism - How It Has Become The Heartbeat of Humanity</h2>
+        <p>Published on: 2023-09-13</p>
+        <p>Updated on: 2020-11-24</p>
+        <p>Author: [Clyde Baidoo]</p>
+        <div class="content">
+            <!-- Content goes here -->
+        </div>
+    </article>
+</section>
+
+</body>
+</html>
