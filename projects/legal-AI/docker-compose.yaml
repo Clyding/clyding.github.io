@@ -174,12 +174,13 @@ services:
       - elastic-search-data:/usr/share/elasticsearch/data
   
   app:
-    build: llm-app/.
-    container_name: llm_app
+    build: app/.
+    container_name: app
     environment:
-      - HUGGINGFACE_KEY=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
+      - HUGGINGFACE_KEY=""
+      
     volumes:
-      - ./llm-app/:/app
+      - ./app/:/app
     networks:
       - network
     depends_on:

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Reading List</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700%7CRoboto+Slab:100,300,400,500,700%7CMaterial+Icons">
+
+  <style>
+    :root {
+      --global-bg-color: #fff;
+      --global-text-color: #000;
+      --global-text-color-light: #828282;
+      --global-theme-color: #B509AC;       
+      --global-hover-color: #B509AC;
+      --global-divider-color: rgba(0,0,0,.1);
+      --global-card-bg-color: #fff;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      color: var(--global-text-color);
+      background: var(--global-bg-color);
+    }
+
+    a {
+      color: var(--global-theme-color);
+      text-decoration: none;
+    }
+    a:hover { color: var(--global-hover-color); text-decoration: underline; }
+
+    .navbar {
+      background: var(--global-bg-color) !important;
+      border-bottom: 1px solid var(--global-divider-color);
+    }
+    .navbar-brand {
+      font-family: 'Roboto Slab', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--global-text-color) !important;
+    }
+
+    .post {
+      margin-top: 2rem;
+    }
+    .post-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+    .post-description {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--global-text-color-light);
+      margin-bottom: 2rem;
+    }
+
+    h2.year {
+      color: var(--global-text-color-light);
+      border-top: 1px solid var(--global-divider-color);
+      padding-top: 1rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-align: right;
+    }
+
+    .book-entry {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--global-divider-color);
+    }
+    .book-entry:last-child { border-bottom: none; }
+
+    .entry-num {
+      min-width: 2.2rem;
+      color: var(--global-text-color-light);
+      font-size: 0.72rem;
+      padding-top: 0.1rem;
+      text-align: right;
+      padding-right: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .entry-body {
+      flex: 1;
+    }
+
+    .entry-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--global-text-color);
+      line-height: 1.35;
+    }
+
+    .entry-author {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--global-text-color-light);
+      margin-top: 0.1rem;
+    }
+
+    .entry-month {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--global-theme-color);
+      margin-left: auto;
+      padding-left: 1rem;
+      flex-shrink: 0;
+      padding-top: 0.1rem;
+    }
+
+    .badge-in-progress {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--global-theme-color);
+      color: #fff;
+      border-radius: 3px;
+      padding: 0.2em 0.55em;
+      vertical-align: middle;
+      margin-left: 0.5rem;
+      position: relative;
+      top: -2px;
+    }
+
+    .year-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.4rem;
+    }
+    .year-toggle:hover { color: var(--global-theme-color); }
+    .year-toggle .fas {
+      font-size: 0.65rem;
+      color: var(--global-text-color-light);
+      transition: transform 0.2s;
+    }
+    .year-toggle.collapsed .fas { transform: rotate(180deg); }
+  </style>
+</head>
+
+<body class="fixed-top-nav">
+    <header>
+        <!-- Navigation Bar -->
+        <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+            <div class="container">
+                <!-- Toggle Button -->
+                <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse text-right" id="navbarNav">
+                    <!-- Navigation Links -->
+                    <ul class="navbar-nav ml-auto flex-nowrap">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">about<span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/blog/">blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/experiences/">experiences</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/awards/">awards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/projects/">projects</a>
+                        </li>
+                        <li class="toggle-container">
+                            <!-- Theme Toggle Button -->
+                            <button id="light-toggle" title="Change theme">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Progress Bar -->
+        <progress id="progress" value="0">
+            <div class="progress-container">
+                <span class="progress-bar"></span>
+            </div>
+        </progress>
+    </header>
+
+<nav class="navbar navbar-expand-sm navbar-light sticky-top" id="navbar">
+  <span class="navbar-brand">reading list</span>
+</nav>
+
+<div class="container mt-4">
+  <div class="post">
+
+    <header class="post-header">
+      <h1 class="post-title">
+        Books
+        <span class="badge-in-progress">in progress --> 2026</span>
+      </h1>
+      <p class="post-description">Personal Catalogue · (yes I have time... no I haven't seen your text!)</p>
+    </header>
+
+    <article>
+
+      <!-- ── 2026 ─────────────────────────── -->
+      <h2 class="year">
+        <span class="year-toggle" data-target="#list-2026">
+          2026 <small style="font-size:0.78em;color:#bbb;">20 books</small>
+          <i class="fas fa-chevron-up"></i>
+        </span>
+      </h2>
+      <div id="list-2026">
+        <div class="book-entry"><span class="entry-num">1</span><div class="entry-body"><div class="entry-title">Man Searching for Meaning</div></div><span class="entry-month">Jan</div>
+        <div class="book-entry"><span class="entry-num">2</span><div class="entry-body"><div class="entry-title">How Not to Be Wrong</div></div><span class="entry-month">Feb</div>
+        <div class="book-entry"><span class="entry-num">3</span><div class="entry-body"><div class="entry-title">Upward Spiral</div></div><span class="entry-month">Mar</span></div>
+        <div class="book-entry"><span class="entry-num">4</span><div class="entry-body"><div class="entry-title">Portraits of Resilience</div></div><span class="entry-month">Apr</span></div>
+        <div class="book-entry"><span class="entry-num">5</span><div class="entry-body"><div class="entry-title">The New Jim Crow</div></div><span class="entry-month">May</span></div>
+        <div class="book-entry"><span class="entry-num">6</span><div class="entry-body"><div class="entry-title">Reductionism in Arts and Sciences</div></div><span class="entry-month">Jun</span></div>
+        <div class="book-entry"><span class="entry-num">7</span><div class="entry-body"><div class="entry-title">The Myth of Sisyphus</div></div><span class="entry-month">Jul</span></div>
+        <div class="book-entry"><span class="entry-num">8</span><div class="entry-body"><div class="entry-title">Race to Technology</div></div><span class="entry-month">Aug</span></div>
+        <div class="book-entry"><span class="entry-num">9</span><div class="entry-body"><div class="entry-title">The Selfish Game</div></div><span class="entry-month">Sep</span></div>
+        <div class="book-entry"><span class="entry-num">10</span><div class="entry-body"><div class="entry-title">Men Without Women</div></div><span class="entry-month">Oct</span></div>
+        <div class="book-entry"><span class="entry-num">11</span><div class="entry-body"><div class="entry-title">NLP in Action</div><div class="entry-author">Hobson Lane, Cole Howard, Hannes Max Hapke</div></div></div>
+        <div class="book-entry"><span class="entry-num">12</span><div class="entry-body"><div class="entry-title">Deep Learning for NLP</div><div class="entry-author">Jason Brownlee</div></div></div>
+        <div class="book-entry"><span class="entry-num">13</span><div class="entry-body"><div class="entry-title">Algorithms for Decision Making</div><div class="entry-author">Mykel J. Kochenderfer, Tim A. Wheeler, Kyle H. Wray</div></div></div>
+        <div class="book-entry"><span class="entry-num">14</span><div class="entry-body"><div class="entry-title">Algorithms for Optimization</div><div class="entry-author">Mykel J. Kochenderfer, Tim A. Wheeler</div></div></div>
+        <div class="book-entry"><span class="entry-num">15</span><div class="entry-body"><div class="entry-title">Fairness in Machine Learning</div><div class="entry-author">Solon Barocas, Moritz Hardt, Arvind Narayanan</div></div></div>
+        <div class="book-entry"><span class="entry-num">16</span><div class="entry-body"><div class="entry-title">Grokking Algorithms</div><div class="entry-author">Aditya Y. Bhargava</div></div></div>
+        <div class="book-entry"><span class="entry-num">17</span><div class="entry-body"><div class="entry-title">Competitive Programmer's Handbook</div><div class="entry-author">Antti Laaksonen</div></div></div>
+        <div class="book-entry"><span class="entry-num">18</span><div class="entry-body"><div class="entry-title">Tutorial on Diffusion Models</div><div class="entry-author">Stanley Chan</div></div></div>
+        <div class="book-entry"><span class="entry-num">19</span><div class="entry-body"><div class="entry-title">Intro to Automata, Languages &amp; Computation</div><div class="entry-author">John E. Hopcroft &amp; Jeffrey D. Ullman</div></div></div>
+        <div class="book-entry"><span class="entry-num">20</span><div class="entry-body"><div class="entry-title">Neuroscience</div><div class="entry-author">Mark F. Bear, Barry W. Connors &amp; Michael A. Paradiso</div></div></div>
+      </div>
+
+      <!-- ── 2025 ─────────────────────────── -->
+      <h2 class="year">
+        <span class="year-toggle" data-target="#list-2025">
+          2025 <small style="font-size:0.78em;color:#bbb;">14 books</small>
+          <i class="fas fa-chevron-up"></i>
+        </span>
+      </h2>
+      <div id="list-2025">
+        <div class="book-entry"><span class="entry-num">1</span><div class="entry-body"><div class="entry-title">Zero to One</div><div class="entry-author">Peter Thiel</div></div></div>
+        <div class="book-entry"><span class="entry-num">2</span><div class="entry-body"><div class="entry-title">Atomic Habits</div><div class="entry-author">James Clear</div></div></div>
+        <div class="book-entry"><span class="entry-num">3</span><div class="entry-body"><div class="entry-title">Quiet</div><div class="entry-author">Susan Cain</div></div></div>
+        <div class="book-entry"><span class="entry-num">4</span><div class="entry-body"><div class="entry-title">48 Laws of Power</div><div class="entry-author">Robert Greene</div></div></div>
+        <div class="book-entry"><span class="entry-num">5</span><div class="entry-body"><div class="entry-title">Ikigai</div><div class="entry-author">Francesc Miralles &amp; Hector Garcia</div></div></div>
+        <div class="book-entry"><span class="entry-num">6</span><div class="entry-body"><div class="entry-title">Elon Musk</div><div class="entry-author">Ashlee Vance</div></div></div>
+        <div class="book-entry"><span class="entry-num">7</span><div class="entry-body"><div class="entry-title">Graph Algorithms</div><div class="entry-author">Mark Needham &amp; Amy E. Hodler</div></div></div>
+        <div class="book-entry"><span class="entry-num">8</span><div class="entry-body"><div class="entry-title">How to Hack Computers</div><div class="entry-author">Joel Tope</div></div></div>
+        <div class="book-entry"><span class="entry-num">9</span><div class="entry-body"><div class="entry-title">Algorithm Design Manual</div><div class="entry-author">Stephen Skiena</div></div></div>
+        <div class="book-entry"><span class="entry-num">10</span><div class="entry-body"><div class="entry-title">Advanced Level Physics (Nelkon & Parker)</div><div class="entry-author">M. Nelkon &amp; P. Parker</div></div></div>
+        <div class="book-entry"><span class="entry-num">11</span><div class="entry-body"><div class="entry-title">Modern Robotics</div><div class="entry-author">Kevin M. Lynch &amp; Frank C. Park</div></div></div>
+        <div class="book-entry"><span class="entry-num">12</span><div class="entry-body"><div class="entry-title">Kotlin</div><div class="entry-author">Peter Spath</div></div></div>
+        <div class="book-entry"><span class="entry-num">13</span><div class="entry-body"><div class="entry-title">Pragmatic Programmer</div><div class="entry-author">David Thomas &amp; Andrew Hunt</div></div></div>
+        <div class="book-entry"><span class="entry-num">14</span><div class="entry-body"><div class="entry-title">Ubuntu Linux</div><div class="entry-author">Matthew Helmke, Andrew Hudson, Paul Hudson</div></div></div>
+      </div>
+
+      <!-- ── 2024 ─────────────────────────── -->
+      <h2 class="year">
+        <span class="year-toggle" data-target="#list-2024">
+          2024 <small style="font-size:0.78em;color:#bbb;">14 books</small>
+          <i class="fas fa-chevron-up"></i>
+        </span>
+      </h2>
+      <div id="list-2024">
+        <div class="book-entry"><span class="entry-num">1</span><div class="entry-body"><div class="entry-title">Talent is Never Enough</div><div class="entry-author">John C. Maxwell</div></div></div>
+        <div class="book-entry"><span class="entry-num">2</span><div class="entry-body"><div class="entry-title">Late Bloomers</div><div class="entry-author">Rich Karlgaard</div></div></div>
+        <div class="book-entry"><span class="entry-num">3</span><div class="entry-body"><div class="entry-title">The Secret</div><div class="entry-author">Rhonda Byrne</div></div></div>
+        <div class="book-entry"><span class="entry-num">4</span><div class="entry-body"><div class="entry-title">No More Mr Nice Guy</div><div class="entry-author">Robert A. Glover</div></div></div>
+        <div class="book-entry"><span class="entry-num">5</span><div class="entry-body"><div class="entry-title">War is a Racket</div><div class="entry-author">Brigadier Gen. Smedley Darlington Butler</div></div></div>
+        <div class="book-entry"><span class="entry-num">6</span><div class="entry-body"><div class="entry-title">Heaven</div><div class="entry-author">Mieko Kawakami</div></div></div>
+        <div class="book-entry"><span class="entry-num">7</span><div class="entry-body"><div class="entry-title">Going Solo</div><div class="entry-author">Roald Dahl</div></div></div>
+        <div class="book-entry"><span class="entry-num">8</span><div class="entry-body"><div class="entry-title">A Better Man</div><div class="entry-author">Louise Penny</div></div></div>
+        <div class="book-entry"><span class="entry-num">9</span><div class="entry-body"><div class="entry-title">After Whiteness</div><div class="entry-author">Willie James Jennings</div></div></div>
+        <div class="book-entry"><span class="entry-num">10</span><div class="entry-body"><div class="entry-title">Rational Optimist</div><div class="entry-author">Matt Ridley</div></div></div>
+        <div class="book-entry"><span class="entry-num">11</span><div class="entry-body"><div class="entry-title">Psycho Cybernetics</div><div class="entry-author">Maxwell Maltz</div></div></div>
+        <div class="book-entry"><span class="entry-num">12</span><div class="entry-body"><div class="entry-title">Algorithm Design Manual</div><div class="entry-author">Stephen S. Skiena</div></div></div>
+        <div class="book-entry"><span class="entry-num">13</span><div class="entry-body"><div class="entry-title">KOV's Series Chemistry</div><div class="entry-author">William Agyapong Quaittoo</div></div></div>
+        <div class="book-entry"><span class="entry-num">14</span><div class="entry-body"><div class="entry-title">Modern Robotics</div><div class="entry-author">Kevin M. Lynch &amp; Frank C. Park</div></div></div>
+      </div>
+
+      <!-- ── 2023 ─────────────────────────── -->
+      <h2 class="year">
+        <span class="year-toggle" data-target="#list-2023">
+          2023 <small style="font-size:0.78em;color:#bbb;">5 books</small>
+          <i class="fas fa-chevron-up"></i>
+        </span>
+      </h2>
+      <div id="list-2023">
+        <div class="book-entry"><span class="entry-num">1</span><div class="entry-body"><div class="entry-title">The Future of Humanity</div><div class="entry-author">Michio Kaku</div></div></div>
+        <div class="book-entry"><span class="entry-num">2</span><div class="entry-body"><div class="entry-title">Mastery</div><div class="entry-author">Robert Greene</div></div></div>
+        <div class="book-entry"><span class="entry-num">3</span><div class="entry-body"><div class="entry-title">Eyes in the Sky</div><div class="entry-author">Arthur Holland Michel</div></div></div>
+        <div class="book-entry"><span class="entry-num">4</span><div class="entry-body"><div class="entry-title">Shoe Dog</div><div class="entry-author">Phil Knight</div></div></div>
+        <div class="book-entry"><span class="entry-num">5</span><div class="entry-body"><div class="entry-title">Nikola Tesla</div><div class="entry-author">Richard Munson</div></div></div>
+      </div>
+
+    </article>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+<script>
+  $(document).on('click', '.year-toggle', function () {
+    var target = $(this).data('target');
+    var $list = $(target);
+    var $icon = $(this).find('.fas');
+    var isCollapsed = $(this).hasClass('collapsed');
+    if (isCollapsed) {
+      $list.slideDown(180);
+      $(this).removeClass('collapsed');
+    } else {
+      $list.slideUp(180);
+      $(this).addClass('collapsed');
+    }
+  });
+
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function () { progressBar.attr({ value: getCurrentScrollPosition() }); });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  function getCurrentScrollPosition() { return $(window).scrollTop(); }
+  function initializeProgressElement() {
+    let e = $("#navbar").outerHeight(!0);
+    $("body").css({ "padding-top": e });
+    progressBar.css({ top: e });
+    progressBar.attr({ max: getDistanceToScroll(), value: getCurrentScrollPosition() });
+  }
+  function getDistanceToScroll() { return $(document).height() - $(window).height(); }
+  function resizeProgressBar() { progressBar.css({ width: getWidthPercentage() + "%" }); }
+  function getWidthPercentage() { return getCurrentScrollPosition() / getDistanceToScroll() * 100; }
+  const progressBar = $("#progress");
+  window.onload = function () { setTimeout(progressBarSetup, 50); };
+</script>
+
+</body>
+</html>
